@@ -56,12 +56,11 @@ public class FileUpload extends HttpServlet {
 			String encoding = "utf-8";						 			// 인코딩 타입
 			File currentDirPath = new File("C:\\file_repo"); 			// 업로드할 경로
 			
-			// test
+			// 해당 경로에 폴더가 없을때 생성
 			if(currentDirPath.exists() == false) {
 				currentDirPath.mkdir();
 			}
-			// /test
-			
+
 			
 			DiskFileItemFactory factory = new DiskFileItemFactory(); 	// 업로드 관련 API 객체 생성 (1)
 			
