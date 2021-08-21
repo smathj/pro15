@@ -28,6 +28,9 @@ public class FileUpload extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("-----------------------------------");
+		System.out.println("Get - upload.do 호출");
+		
 		doHandle(request, response);
 	}
 
@@ -37,29 +40,46 @@ public class FileUpload extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
+		System.out.println("-----------------------------------");
+		System.out.println("Post - upload.do 호출");
+		
 		doHandle(request, response);
 	}
 
 	private void doHandle(HttpServletRequest request, HttpServletResponse response)	throws ServletException, IOException {
+		
+		System.out.println("-----------------------------------");
+		System.out.println("Upload 수행 비즈니스 로직 실행");
+		
 		request.setCharacterEncoding("utf-8");
-			String encoding = "utf-8";
-			File currentDirPath = new File("C:\\file_repo");
-			DiskFileItemFactory factory = new DiskFileItemFactory();
-			factory.setRepository(currentDirPath);
-			factory.setSizeThreshold(1024 * 1024);
+		
+			String encoding = "utf-8";						 			// 인코딩 타입
+			File currentDirPath = new File("C:\\file_repo"); 			// 업로드할 경로
+			
+			// test
+			if(currentDirPath.exists() == false) {
+				currentDirPath.mkdir();
+			}
+			// /test
+			
+			
+			DiskFileItemFactory factory = new DiskFileItemFactory(); 	// 업로드 관련 API 객체 생성 (1)
+			
+			factory.setRepository(currentDirPath);						// 업로드할 경로 설정
+			factory.setSizeThreshold(1024 * 1024);						// 파일 크기 설정
 
-			ServletFileUpload upload = new ServletFileUpload(factory);
+			ServletFileUpload upload = new ServletFileUpload(factory);	// 업로드 관련 API 객체 생성 (2)
 			try {
-				List items = upload.parseRequest(request);
+				List items = upload.parseRequest(request);				// 전달받은 매개변수르 List로 받는다
 				for (int i = 0; i < items.size(); i++) {
 					FileItem fileItem = (FileItem) items.get(i);
 	
 					if (fileItem.isFormField()) {
 						System.out.println(fileItem.getFieldName() + "=" + fileItem.getString(encoding));
 					} else {
-						System.out.println("�Ķ���͸�:" + fileItem.getFieldName());
-						System.out.println("���ϸ�:" + fileItem.getName());
-						System.out.println("����ũ��:" + fileItem.getSize() + "bytes");
+						System.out.println("매개변수이름:" + fileItem.getFieldName());
+						System.out.println("파일이름:" + fileItem.getName());
+						System.out.println("파일크기:" + fileItem.getSize() + "bytes");
 	
 						if (fileItem.getSize() > 0) {
 							int idx = fileItem.getName().lastIndexOf("\\");
@@ -68,12 +88,14 @@ public class FileUpload extends HttpServlet {
 							}
 							String fileName = fileItem.getName().substring(idx + 1);
 							File uploadFile = new File(currentDirPath + "\\" + fileName);
-							fileItem.write(uploadFile);
+							fileItem.write(uploadFile);					// 업로드 수행
+							System.out.println("---------업로드 성공---------");
 						} // end if
 					} // end if
 				} // end for
 			} catch (Exception e) {
 				e.printStackTrace();
+				System.out.println("---------업로드 실패---------");
 			}
 	}
 

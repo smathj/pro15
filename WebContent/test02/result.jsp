@@ -9,7 +9,7 @@
 %>
 <html>
 <head>
-<meta charset=”UTF-8">
+<meta charset="UTF-8">
 <c:set var="file1" value="${param.param1}"  />    
 <c:set var="file2" value="${param.param2}"  />
  
@@ -22,6 +22,7 @@
 
 <c:if test="${not empty file1 }">
 <img src="${contextPath}/download.do?fileName=${file1}"  width=300 height=300 /><br>
+<a href="${contextPath}/download.do?fileName=${file1}" >파일 내려받기</a><br>
 </c:if>
 <br>
 <c:if test="${not empty file2 }">

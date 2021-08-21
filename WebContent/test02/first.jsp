@@ -14,8 +14,8 @@
 <body>
  
  <form method="post"  action="result.jsp" >
-	 <input type=hidden  name="param1" value="duke.png" /> <br>
-	 <input type=hidden  name="param2" value="duke2.jpg" /> <br>
+	 <input type=hidden  name="param1" value="KakaoTalk_20210821_205822584.jpg" /> <br>
+	 <input type=hidden  name="param2" value="jindoDog.jpg" /> <br>
    <input type ="submit" value="이미지 다운로드">	 
  </form> 
 </body>
