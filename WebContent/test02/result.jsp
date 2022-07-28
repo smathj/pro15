@@ -20,6 +20,7 @@
 파라미터 1 :<c:out value="${file1}"  /><br>
 파라미터 2 :<c:out value="${file2}"  /><br>
 
+<!-- 이미지, 파일다운로드는 백엔드 로직이 같다 -->
 <c:if test="${not empty file1 }">
 <img src="${contextPath}/download.do?fileName=${file1}"  width=300 height=300 /><br>
 <a href="${contextPath}/download.do?fileName=${file1}" >파일 내려받기</a><br>

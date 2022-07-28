@@ -71,7 +71,7 @@ public class FileUpload extends HttpServlet {
 			try {
 				List items = upload.parseRequest(request);				// 전달받은 매개변수르 List로 받는다
 				for (int i = 0; i < items.size(); i++) {
-					FileItem fileItem = (FileItem) items.get(i);
+					FileItem fileItem = (FileItem) items.get(i);		// 파일 객체를 파라미터로 받아서, 실제로 업로드 처리하는 객체
 	
 					if (fileItem.isFormField()) {
 						System.out.println(fileItem.getFieldName() + "=" + fileItem.getString(encoding));

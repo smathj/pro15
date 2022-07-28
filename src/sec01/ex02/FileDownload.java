@@ -59,12 +59,13 @@ public class FileDownload extends HttpServlet {
 		File f = new File(downFile);								// 다운로드 받은 파일의 절대 경로를 담은, 파일 객체 생성
 		
 		
-		
+		// [파일 헤더] 추가
 		response.setHeader("Cache-Control", "no-cache");							   //(1)			
 		// (1) : Response의 헤더 설정 , 노캐쉬 , (걍쓰셈) 
 		response.addHeader("Content-disposition", "attachment; fileName=" + fileName); // (2)
 		// (2) : Response의 헤더 추가 , 파일 첨부한다 ~
 		
+		// [중요] 파일과 연결된 파일 inputStream, 이객체로 읽는다
 		FileInputStream in = new FileInputStream(f);				
 		// 서버의 파일을 일단 가져와야하니 , 파일 입력 스트림 객체 생성 
 		
